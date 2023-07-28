@@ -47,12 +47,19 @@ export function Table() {
     dispatch(sortPosts(sortBy as KeysMatching<IPost, string>));
   }, [sortBy]);
 
+  if (!tableHeaderKeyTitlePairs.length) {
+    return (
+      <div className='mx-auto w-full text-center p-6'>
+        <h1 className='font-bold text-3xl'>Постов нет</h1>
+      </div>
+    )
+  }
   return (
     <table className="w-full table-fixed">
       <thead className='bg-[#474955] text-white w-full'>
         <tr className='w-11/12 md:w-full'>
           {
-            tableHeaderKeyTitlePairs.length && tableHeaderKeyTitlePairs.map((keyTitlePair, idx) => {
+            tableHeaderKeyTitlePairs.map((keyTitlePair, idx) => {
               return <TableHeaderTitle
                 activeIcon={activeTableHeaderTitleIcon}
                 setActiveIcon={setActiveTableHeaderTitleIcon}
